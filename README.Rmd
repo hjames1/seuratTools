@@ -35,9 +35,10 @@ This is a basic example which shows you how to solve a common problem:
 
 ```{r example,fig.height=4,fig.width=8}
 # 载入你的包和数据
+library(Seurat)
 library(seuratTools)
 data(pbmc1k) 
-
+pbmc1k <- SCTransform(pbmc1k, verbose = FALSE)
 # 场景1 (默认行为): 校正P值，显示星号
 VlnPlot_pooled_test(pbmc1k, "MS4A1", "seurat_annotations", p.adjust.method = "fdr", label.type = "signif")
 
@@ -49,4 +50,52 @@ VlnPlot_pooled_test(pbmc1k, "MS4A1", "seurat_annotations", p.adjust.method = NUL
 
 # 场景4: 不校正，直接用原始P值显示数值
 VlnPlot_pooled_test(pbmc1k, "MS4A1", "seurat_annotations", p.adjust.method = NULL, label.type = "p.value")
+```
+
+
+
+```{r}
+
+# 加载IFNB数据
+data("ifnb1k")
+ifnb1k <- SCTransform(ifnb1k, verbose = FALSE)
+
+# 场景1: 默认行为（BH校正，显示星号）
+PlotCompareExpression(
+  seurat_obj = ifnb1k,
+  feature = "CXCR4",
+  group.by = "seurat_annotations",
+  p.adjust.method = "BH",
+  split.by = "stim"
+)
+
+# 场景2: BH校正，显示P值数值
+PlotCompareExpression(
+  seurat_obj = ifnb1k,
+  feature = "CXCR4",
+  group.by = "seurat_annotations",
+  split.by = "stim",
+  p.adjust.method = "BH",
+  label.type = "p.value"
+  
+)
+
+# 场景3: 不进行校正，直接显示原始P值的星号
+PlotCompareExpression(
+  seurat_obj = ifnb1k,
+  feature = "CXCR4",
+  group.by = "seurat_annotations",
+  split.by = "stim",
+  p.adjust.method = NULL # 传入 NULL 来跳过校正
+)
+
+# 场景4: 不进行校正，直接显示原始P值的数值
+PlotCompareExpression(
+  seurat_obj = ifnb1k,
+  feature = "CXCR4",
+  group.by = "seurat_annotations",
+  split.by = "stim",
+  label.type = "p.value",
+  p.adjust.method = NULL # 传入 NULL 来跳过校正
+)
 ```

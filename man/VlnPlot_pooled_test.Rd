@@ -9,7 +9,8 @@ VlnPlot_pooled_test(
   feature,
   group.by,
   test.method = "wilcox.test",
-  p.adjust.method = "fdr",
+  p.adjust.method = NULL,
+  label.type = "signif",
   ...
 )
 }
@@ -22,7 +23,9 @@ VlnPlot_pooled_test(
 
 \item{test.method}{统计检验方法，"t.test" 或 "wilcox.test"。}
 
-\item{p.adjust.method}{p值校正方法，默认为 "fdr"。}
+\item{p.adjust.method}{p值校正方法。如果为NULL（默认值），则不进行校正。可选值见 \code{stats::p.adjust}，常用 "fdr"。}
+
+\item{label.type}{标签显示类型。必须是 "signif" (显示显著性星号，默认) 或 "p.value" (显示数值)之一。}
 
 \item{...}{其他所有要传递给 \code{Seurat::VlnPlot} 的参数。}
 }
@@ -31,5 +34,5 @@ VlnPlot_pooled_test(
 }
 \description{
 对图中的每一个组，此函数会将其与所有其他组的合并体进行比较，
-并在每个小提琴图的上方直接标注FDR校正后的p值显著性。
+并在每个小提琴图的上方直接标注p值或其显著性水平。
 }
