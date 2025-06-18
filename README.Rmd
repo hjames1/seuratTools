@@ -35,14 +35,9 @@ This is a basic example which shows you how to solve a common problem:
 
 ```{r example}
 library(seuratTools)
-library(Seurat)
-library(SeuratData)
-InstallData("pbmc3k")
-data("pbmc3k.final")
-pbmc <- pbmc3k.final
-pbmc <- UpdateSeuratObject(pbmc)
+
 VlnPlot_pooled_test(
-  seurat_obj = pbmc,
+  seurat_obj = pbmc1k,
   feature = "MS4A1",
   group.by = "seurat_annotations",
   test.method = "wilcox.test",
