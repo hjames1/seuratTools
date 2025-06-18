@@ -18,3 +18,5 @@ Imports:
     rlang,
     rstatix,
     Seurat
+URL: https://github.com/hjames1/seuratTools
+BugReports: https://github.com/hjames1/seuratTools/issues
