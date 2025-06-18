@@ -77,8 +77,8 @@ VlnPlot_pooled_test <- function(seurat_obj, feature, group.by, test.method = "wi
   }
 
   # 4. 计算每个标记的Y轴位置
-  label_positions <- plot_data %>%
-    dplyr::group_by(!!rlang::sym(group_col)) %>%
+  label_positions <- plot_data |>
+    dplyr::group_by(!!rlang::sym(group_col)) |>
     dplyr::summarise(y.position = max(!!rlang::sym(expr_col), na.rm = TRUE))
 
   # 5. 合并统计结果和位置信息
