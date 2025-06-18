@@ -20,3 +20,6 @@ Imports:
     Seurat
 URL: https://github.com/hjames1/seuratTools
 BugReports: https://github.com/hjames1/seuratTools/issues
+Depends: 
+    R (>= 2.10)
+LazyData: true
